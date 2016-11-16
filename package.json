@@ -1,0 +1,26 @@
+{
+  "name": "d2l-galen-utils",
+  "version": "0.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "bin": {
+    "d2l-galen": "bin/index.js"
+  },
+  "scripts": {
+    "test": "eslint ."
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "yargs": "^6.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.10.1",
+    "eslint-config-brightspace": "^0.2.4",
+    "galenframework": "^2.3.1",
+    "galenframework-cli": "^2.3.1"
+  },
+  "peerDependencies": {
+    "galenframework": "*",
+  }
+}
