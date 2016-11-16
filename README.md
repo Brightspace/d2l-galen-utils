@@ -13,7 +13,7 @@ See the [galen config documentation][GalenConfig] and [gspec documentation][Gale
 ### d2l-galen
 
 `d2l-galen` is a CLI that puts everything together. The input is a Javascript file
-that defines `browsers` and `specs`. (See the example configs.)
+that defines `browsers` and `specs`. (See the example configs.).
 
 For every defined browser, `d2l-galen`
 
@@ -28,6 +28,9 @@ For every defined browser, `d2l-galen`
 ```
 d2l-galen test <path_to_config> -- --htmlreport report
 d2l-galen dump <path_to_config> -d dumps
+
+# To make work with SauceLabs
+d2l-galen test <path_to_config> -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_SLUG TRAVIS_BUILD_NUMBER -- --htmlreport report
 ```
 
 #### Example Configs

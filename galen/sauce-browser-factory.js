@@ -9,11 +9,11 @@
  *   size: '1400x900'
  * })
  * System Properties
- * USERNAME          sauce username
- * ACCESS_KEY        sauce access key
- * TUNNEL_IDENTIFIER sauce connect tunnel_identifier
- * NAME              sauce test name
- * BUILD             sauce build number
+ * d2l.galen.utils.env.TRAVIS_JOB_NUMBER
+ * d2l.galen.utils.env.TRAVIS_REPO_SLUG
+ * d2l.galen.utils.env.TRAVIS_BUILD_NUMBER
+ * d2l.galen.utils.env.SAUCE_USERNAME
+ * d2l.galen.utils.env.SAUCE_ACCESS_KEY
  */
 'use strict';
 
@@ -24,13 +24,13 @@ function sauceReportStatus(driver, status) {
 function sauceBrowserFactory(settings, url) {
 	settings = settings || {};
 	settings.desiredCapabilities = settings.desiredCapabilities || {};
-	settings.desiredCapabilities.tunnelIdentifier = System.getProperty('TUNNEL_IDENTIFIER');
-	settings.desiredCapabilities.name = System.getProperty('NAME');
-	settings.desiredCapabilities.build = System.getProperty('BUILD');
+	settings.desiredCapabilities.tunnelIdentifier = System.getProperty('d2l.galen.utils.env.TRAVIS_JOB_NUMBER');
+	settings.desiredCapabilities.name = System.getProperty('d2l.galen.utils.env.TRAVIS_REPO_SLUG');
+	settings.desiredCapabilities.build = System.getProperty('d2l.galen.utils.env.TRAVIS_BUILD_NUMBER');
 	settings.desiredCapabilities.tags = 'galen';
 
-	var USERNAME = System.getProperty('USERNAME');
-	var ACCESS_KEY = System.getProperty('ACCESS_KEY');
+	var USERNAME = System.getProperty('d2l.galen.utils.env.SAUCE_USERNAME');
+	var ACCESS_KEY = System.getProperty('d2l.galen.utils.env.SAUCE_ACCESS_KEY');
 	var driver = createGridDriver('http://' + USERNAME + ':' + ACCESS_KEY + '@ondemand.saucelabs.com:80/wd/hub', settings);
 	url && driver.get(url);
 	return {

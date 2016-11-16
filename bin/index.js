@@ -4,6 +4,13 @@
 const spawn = require('child_process').spawn;
 const path = require('path');
 
+function copyEnv(envs) {
+	return envs.map(function(env) {
+		const value = process.env[env];
+		return `-Dd2l.galen.utils.env.${env}=${value}`;
+	});
+}
+
 function run(argv, config, test, entrypoint) {
 	let args = [
 		'test',
@@ -12,7 +19,7 @@ function run(argv, config, test, entrypoint) {
 		`-Dd2l.galen.utils.test=${test}`
 	];
 	argv.dumpsDir && args.push('-Dd2l.galen.utils.dumps=' + argv.dumpsDir);
-	args = args.concat(argv._.slice(1));
+	args = args.concat(copyEnv(argv.includeEnv), argv._.slice(1));
 
 	const command = [];
 	const re = /("(.*?)"|'(.*?)'|([^"'\s]+))+(?=\s*|\s*$)/g;
@@ -34,10 +41,15 @@ function run(argv, config, test, entrypoint) {
 
 require('yargs')
 	.usage('$0 <cmd> [args]')
-	.alias('c', 'command')
 	.describe('c', 'command to run galen')
 	.default('c', 'galen')
+	.alias('c', 'command')
 	.global('c')
+	.describe('i', 'include environment variables as System Properties under d2l.galen.utils.env.*')
+	.alias('i', 'include-env')
+	.global('i')
+	.array('i')
+	.default('i', [])
 	.command('test <config>', 'Run D2L Galen tests', {
 		entrypoint: {
 			alias: 'e',
