@@ -85,6 +85,10 @@ will be skipped.
 [dump](galen/dump.js) is a script that is meant to be loaded after `browsers` and `specs` have been defined.
 It will run through all the browsers and dump all the pages
 
+## Coding styles
+
+See the [Best Practices & Style Guide](https://github.com/Brightspace/valence-ui-docs/wiki/Best-Practices-&-Style-Guide) for information on naming conventions, plus information about the [EditorConfig](http://editorconfig.org) rules used in this repo.
+
 [ci-url]: https://travis-ci.org/Brightspace/d2l-galen-utils
 [ci-image]: https://img.shields.io/travis-ci/Brightspace/d2l-galen-utils.svg
 [Galen]: http://galenframework.com/
