@@ -82,8 +82,8 @@ will be skipped.
 [dump](galen/dump.js) is a script that is meant to be loaded after `browsers` and `specs` have been defined.
 It will run through all the browsers and dump all the pages
 
-[ci-url]: https://travis-ci.org/Brightspace/d2l-table-ui
-[ci-image]: https://img.shields.io/travis-ci/Brightspace/d2l-table-ui.svg
+[ci-url]: https://travis-ci.org/Brightspace/d2l-galen-utils
+[ci-image]: https://img.shields.io/travis-ci/Brightspace/d2l-galen-utils.svg
 [Galen]: http://galenframework.com/
 [GalenConfig]: http://galenframework.com/docs/getting-started-configuration/
 [GalenSpec]: http://galenframework.com/docs/reference-galen-spec-language-guide/
