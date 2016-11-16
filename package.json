@@ -21,6 +21,6 @@
     "galenframework-cli": "^2.3.1"
   },
   "peerDependencies": {
-    "galenframework": "*",
+    "galenframework": "*"
   }
 }
