@@ -7,5 +7,9 @@ this.browsers = {
 	phantomjs: {
 		browserName: 'phantomjs',
 		browserFactory: localBrowserFactory.bind(this, ['768x768', 'phantomjs'])
+	},
+	chrome: {
+		browserName: 'chrome',
+		browserFactory: localBrowserFactory.bind(this, ['768x768', 'chrome'])
 	}
 };

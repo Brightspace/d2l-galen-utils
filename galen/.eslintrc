@@ -5,6 +5,7 @@
   },
   "globals": {
     "load": true,
+    "logged": true,
     "$page": true,
     "GalenPages": true,
     "forAll": true,

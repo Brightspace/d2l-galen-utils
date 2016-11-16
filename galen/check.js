@@ -7,17 +7,23 @@ forAll(browsers, function() {
 	test('${browserName}', function(browser) {
 		var browserObj = browser.browserFactory();
 		var driver = browserObj.driver;
+
+		var result = driver.executeScript('return Boolean(Element.prototype.createShadowRoot || Element.prototype.attachShadow)');
+		var hasShadow = result.booleanValue();
 		try {
 			var polymerPage = new PolymerPage(driver);
 
 			Object.keys(specs).forEach(function(key) {
 				var spec = specs[key];
-				if ((!browserObj.hasShadow && spec.shadow) || spec.demo) {
+				if ((!hasShadow && spec.shadow) || spec.demo) {
 					return;
 				}
-				driver.get(spec.endpoint);
-				polymerPage.waitForIt();
-				checkLayout(driver, spec.file);
+				logged(spec.name, function(report) {
+					report.info('GET ' + spec.endpoint);
+					driver.get(spec.endpoint);
+					polymerPage.waitForIt();
+					checkLayout(driver, spec.file);
+				});
 			});
 
 			var passed = this.report.fetchStatistic().getErrors() === 0;
