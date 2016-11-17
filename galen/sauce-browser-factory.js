@@ -29,8 +29,8 @@ function sauceBrowserFactory(settings, url) {
 	settings.desiredCapabilities.build = System.getProperty('d2l.galen.utils.env.TRAVIS_BUILD_NUMBER');
 	settings.desiredCapabilities.tags = 'galen';
 
-	var USERNAME = System.getProperty('d2l.galen.utils.env.SAUCE_USERNAME');
-	var ACCESS_KEY = System.getProperty('d2l.galen.utils.env.SAUCE_ACCESS_KEY');
+	var USERNAME = encodeURIComponent(System.getProperty('d2l.galen.utils.env.SAUCE_USERNAME'));
+	var ACCESS_KEY = encodeURIComponent(System.getProperty('d2l.galen.utils.env.SAUCE_ACCESS_KEY'));
 	var driver = createGridDriver('http://' + USERNAME + ':' + ACCESS_KEY + '@ondemand.saucelabs.com:80/wd/hub', settings);
 	url && driver.get(url);
 	return {

@@ -6,7 +6,7 @@ const path = require('path');
 
 function copyEnv(envs) {
 	return envs.map(function(env) {
-		const value = process.env[env];
+		const value = process.env[env] || '';
 		return `-Dd2l.galen.utils.env.${env}=${value}`;
 	});
 }
