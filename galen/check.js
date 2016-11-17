@@ -8,7 +8,8 @@ forAll(browsers, function() {
 		var browserObj = browser.browserFactory();
 		var driver = browserObj.driver;
 
-		var result = driver.executeScript('return Boolean(Element.prototype.createShadowRoot || Element.prototype.attachShadow)');
+		// TODO: Check for attachShadow when Polymer uses it
+		var result = driver.executeScript('return Boolean(Element.prototype.createShadowRoot)');
 		var hasShadow = result.booleanValue();
 		try {
 			var polymerPage = new PolymerPage(driver);
