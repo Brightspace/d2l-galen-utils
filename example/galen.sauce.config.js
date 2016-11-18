@@ -4,12 +4,9 @@
 load('galen.common.config.js');
 
 this.browsers = {
-	chromeWindows: {
-		browserName: 'chrome-windows',
-		browserFactory: sauceBrowserFactory.bind(this, {
-			browser: 'Chrome',
-			platform: 'WIN10',
-			size: '1400x900'
-		})
-	}
+	chromeWindows: new SauceBrowserFactory({
+		browser: 'Chrome',
+		platform: 'WIN10',
+		size: '1400x900'
+	})
 };

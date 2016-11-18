@@ -2,11 +2,16 @@
 /* eslint no-invalid-this: 0 */
 'use strict';
 
-function localBrowserFactory(args, url) {
-	return {
-		driver: createDriver.apply(this, [url].concat(args)),
-		reportStatus: function() {}
-	};
+function LocalBrowserFactory(settings) {
+	this.settings = settings;
 }
 
-this.localBrowserFactory = localBrowserFactory;
+LocalBrowserFactory.prototype.create = function create(url) {
+	var settings = this.settings;
+	var args = [settings.size, settings.browser];
+	return createDriver.apply(this, [url].concat(args));
+};
+
+LocalBrowserFactory.prototype.reportStatus = function reportStatus() {};
+
+this.LocalBrowserFactory = LocalBrowserFactory;

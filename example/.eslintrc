@@ -5,8 +5,8 @@
   },
   "globals": {
     "load": true,
-    "localBrowserFactory": true,
-    "sauceBrowserFactory": true,
+    "LocalBrowserFactory": true,
+    "SauceBrowserFactory": true,
     "System": true
   }
 }

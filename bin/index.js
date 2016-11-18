@@ -18,6 +18,7 @@ function run(argv, config, test, entrypoint) {
 		`-Dd2l.galen.utils.config=${config}`,
 		`-Dd2l.galen.utils.test=${test}`
 	];
+	argv.reportDir && args.push('--htmlreport', argv.reportDir);
 	argv.dumpsDir && args.push('-Dd2l.galen.utils.dumps=' + argv.dumpsDir);
 	args = args.concat(copyEnv(argv.includeEnv), argv._.slice(1));
 
@@ -58,6 +59,10 @@ require('yargs')
 		test: {
 			alias: 't',
 			default: require.resolve('../galen/check.js')
+		},
+		reportDir: {
+			alias: 'r',
+			default: 'reports'
 		}
 	}, (argv) => {
 		const configPath = path.resolve(process.cwd(), argv.config);

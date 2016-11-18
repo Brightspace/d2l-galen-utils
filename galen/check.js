@@ -3,10 +3,12 @@
 'use strict';
 
 load('polymer-page.js');
-forAll(browsers, function() {
-	test('${browserName}', function(browser) {
-		var browserObj = browser.browserFactory();
-		var driver = browserObj.driver;
+
+Object.keys(browsers).forEach(function(browserName) {
+	var factory = browsers[browserName];
+
+	test(browserName, function() {
+		var driver = factory.create();
 
 		// TODO: Check for attachShadow when Polymer uses it
 		var result = driver.executeScript('return Boolean(Element.prototype.createShadowRoot)');
@@ -28,9 +30,9 @@ forAll(browsers, function() {
 			});
 
 			var passed = this.report.fetchStatistic().getErrors() === 0;
-			browserObj.reportStatus(driver, passed);
+			factory.reportStatus(driver, passed);
 		} catch (e) {
-			browserObj.reportStatus(driver, false);
+			factory.reportStatus(driver, false);
 			throw e;
 		} finally {
 			driver.quit();

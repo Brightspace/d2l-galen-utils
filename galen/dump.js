@@ -2,10 +2,13 @@
 'use strict';
 
 load('polymer-page.js');
-forAll(browsers, function() {
-	test('Open simple.html in ${browserName}', function(browser) {
+
+Object.keys(browsers).forEach(function(browserName) {
+	var factory = browsers[browserName];
+
+	test('Open simple.html in ${browserName}', function() {
 		var dumpsDir = System.getProperty('d2l.galen.utils.dumps');
-		var driver = browser.browserFactory().driver;
+		var driver = factory.create();
 
 		try {
 			var polymerPage = new PolymerPage(driver);

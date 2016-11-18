@@ -56,20 +56,20 @@ galen test node_modules/d2l-galen-utils/galen/entrypoint.test.js -Dd2l.galen.uti
 
 ## Verbose Usage
 
-### localBrowserFactory
+### LocalBrowserFactory
 
-`localBrowserFactory` is a factory used to instantiate a local browser for tests.
+`LocalBrowserFactory` is a factory used to instantiate a local browser for tests.
 
-The result is an object with `driver` and `reportStatus` properties.
+The result is an object with `create` and `reportStatus` methods.
 
 To use the factory, `load(node_modules/d2l-galen-utils/galen/local-browser-factory.js)`
 or use the `d2l-galen` command, which includes it.
 
 ### sauceBrowserFactory
 
-`sauceBrowserFactory` is a factory used to instantiate a sauce browser for tests.
+`SauceBrowserFactory` is a factory used to instantiate a sauce browser for tests.
 
-The result is an object with `driver` and `reportStatus` properties.
+The result is an object with `create` and `reportStatus` methods.
 
 To use the factory, `load(node_modules/d2l-galen-utils/galen/sauce-browser-factory.js)`
 or use the `d2l-galen` command, which includes it.
