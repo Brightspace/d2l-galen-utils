@@ -17,10 +17,6 @@
  */
 'use strict';
 
-function sauceReportStatus(driver, status) {
-	driver.executeScript('sauce:job-result=' + (status ? 'passed' : 'failed'));
-}
-
 function SauceBrowserFactory(settings) {
 	settings = settings || {};
 	settings.desiredCapabilities = settings.desiredCapabilities || {};
@@ -37,10 +33,7 @@ function SauceBrowserFactory(settings) {
 SauceBrowserFactory.prototype.create = function create(url) {
 	var driver = createGridDriver('http://' + this.username + ':' + this.accessKey + '@ondemand.saucelabs.com:80/wd/hub', this.settings);
 	url && driver.get(url);
-	return {
-		driver: driver,
-		reportStatus: sauceReportStatus
-	};
+	return driver;
 };
 
 SauceBrowserFactory.prototype.reportStatus = function reportStatus(driver, status) {
