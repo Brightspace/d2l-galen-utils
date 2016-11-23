@@ -8,6 +8,7 @@
     "logged": true,
     "$page": true,
     "GalenPages": true,
+    "GalenUtils": true,
     "forAll": true,
     "checkLayout": true,
     "dumpPage": true,

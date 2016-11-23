@@ -21,11 +21,21 @@ Object.keys(browsers).forEach(function(browserName) {
 				if ((!hasShadow && spec.shadow) || spec.demo) {
 					return;
 				}
+				var specOpts = spec.opts || {};
 				logged(spec.name, function(report) {
-					report.info('GET ' + spec.endpoint);
 					driver.get(spec.endpoint);
+					report.info('GET ' + spec.endpoint);
+					var size = spec.size || factory.settings.size;
+					size && GalenUtils.resizeDriver(driver, size);
+					size && report.info('Resize: ' + size);
 					polymerPage.waitForIt();
-					checkLayout(driver, spec.file);
+					checkLayout({
+						driver: driver,
+						spec: spec.file,
+						tags: specOpts.tags,
+						vars: specOpts.vars,
+						objects: specOpts.vars
+					});
 				});
 			});
 
