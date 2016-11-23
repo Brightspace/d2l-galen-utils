@@ -26,12 +26,12 @@ Object.keys(browsers).forEach(function(browserName) {
 					driver.get(spec.endpoint);
 					report.info('GET ' + spec.endpoint);
 					var size = spec.size || factory.settings.size;
-					size && GalenUtils.resizeDriver(driver, size);
+					size && resize(driver, size);
 					size && report.info('Resize: ' + size);
 					polymerPage.waitForIt();
 					checkLayout({
 						driver: driver,
-						spec: spec.file,
+						spec: spec.spec,
 						tags: specOpts.tags,
 						vars: specOpts.vars,
 						objects: specOpts.vars

@@ -33,7 +33,57 @@ d2l-galen dump <path_to_config> -d dumps
 d2l-galen test <path_to_config> -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_SLUG TRAVIS_BUILD_NUMBER -- --htmlreport report
 ```
 
-#### Example Configs
+#### Configs
+
+The config is a Javascript file that defines `specs` and `browsers`. For example
+
+```javascript
+this.specs = {
+	'stuff': {
+		name: 'namely stuff',
+		endpoint: 'http://google.ca',
+		spec: 'awesome.gspec',
+		// optional
+		size: '320x600',
+		// http://galenframework.com/docs/reference-galen-javascript-api/#checkLayout
+		opts: {
+			tags: ['mobile'],
+			vars: {},
+			objects: {}
+		}
+	},
+	'stuff-shadow': {
+		// Will only run this spec on browsers that support shadow DOM v0
+		shadow: true,
+		name: 'Stuff in Shadow DOM',
+		endpoint: 'http://google.ca?dom=shadow',
+		spec: 'awesome.shadow.gspec',
+		// optional
+		size: '320x600',
+		// http://galenframework.com/docs/reference-galen-javascript-api/#checkLayout
+		opts: {
+			tags: ['mobile'],
+			vars: {},
+			objects: {}
+		}
+	},
+};
+this.browsers = {
+	// See settings argument for http://galenframework.com/docs/reference-galen-javascript-api/#createGridDriver
+	chromeWindows: new SauceBrowserFactory({
+		browser: 'Chrome',
+		platform: 'WIN10',
+		size: '800x600'
+	}),
+	// Only 2 settings: browser and size
+	phantomjs: new LocalBrowserFactory({
+		browser: 'phantomjs',
+		size: '800x600'
+	})
+};
+```
+
+##### Example Configs
 
 [Example config for local browsers](example/galen.local.config.js)
 
