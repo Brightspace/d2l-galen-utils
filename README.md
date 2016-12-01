@@ -38,36 +38,6 @@ d2l-galen test <path_to_config> -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_S
 The config is a Javascript file that defines `specs` and `browsers`. For example
 
 ```javascript
-this.specs = {
-	'stuff': {
-		name: 'namely stuff',
-		endpoint: 'http://google.ca',
-		spec: 'awesome.gspec',
-		// optional
-		size: '320x600',
-		// http://galenframework.com/docs/reference-galen-javascript-api/#checkLayout
-		opts: {
-			tags: ['mobile'],
-			vars: {},
-			objects: {}
-		}
-	},
-	'stuff-shadow': {
-		// Will only run this spec on browsers that support shadow DOM v0
-		shadow: true,
-		name: 'Stuff in Shadow DOM',
-		endpoint: 'http://google.ca?dom=shadow',
-		spec: 'awesome.shadow.gspec',
-		// optional
-		size: '320x600',
-		// http://galenframework.com/docs/reference-galen-javascript-api/#checkLayout
-		opts: {
-			tags: ['mobile'],
-			vars: {},
-			objects: {}
-		}
-	},
-};
 this.browsers = {
 	// See settings argument for http://galenframework.com/docs/reference-galen-javascript-api/#createGridDriver
 	chromeWindows: new SauceBrowserFactory({
@@ -81,6 +51,39 @@ this.browsers = {
 		size: '800x600'
 	})
 };
+// This can be placed in another file using `load`
+polymerTests(this.browsers, function(test, ctx) {
+	ctx.driver.get('http://foo.bar');
+
+	test('stuff', {
+		endpoint: 'http://google.ca',
+		spec: 'awesome.gspec',
+		// optional
+		size: '320x600',
+		// http://galenframework.com/docs/reference-galen-javascript-api/#checkLayout
+		tags: ['mobile'],
+		vars: {},
+		objects: {}
+	}, function(opts, cb) { // optional callback
+		// do stuff with opts.driver, opts.report to put the page in a state before checking layout or dumping page
+		cb();
+	});
+
+	// Will only run this spec on browsers that support shadow DOM v0
+	test.shadow('stuff-shadow', {
+		endpoint: 'http://google.ca',
+		spec: 'awesome.gspec',
+		// optional
+		size: '320x600',
+		// http://galenframework.com/docs/reference-galen-javascript-api/#checkLayout
+		tags: ['mobile'],
+		vars: {},
+		objects: {}
+	}, function(opts, cb) { // optional callback
+		// do stuff with opts.driver, opts.report to put the page in a state before checking layout or dumping page
+		cb();
+	});
+});
 ```
 
 ##### Example Configs
@@ -115,7 +118,7 @@ The result is an object with `create` and `reportStatus` methods.
 To use the factory, `load(node_modules/d2l-galen-utils/galen/local-browser-factory.js)`
 or use the `d2l-galen` command, which includes it.
 
-### sauceBrowserFactory
+### SauceBrowserFactory
 
 `SauceBrowserFactory` is a factory used to instantiate a sauce browser for tests.
 
@@ -124,16 +127,14 @@ The result is an object with `create` and `reportStatus` methods.
 To use the factory, `load(node_modules/d2l-galen-utils/galen/sauce-browser-factory.js)`
 or use the `d2l-galen` command, which includes it.
 
-### check
+### polymerTests
 
-[check](galen/check.js) is a script that is meant to be loaded after `browsers` and `specs` have been defined.
-It will run through all the browsers and test the specs and report the results to SauceLabs. specs with `demo: true`
-will be skipped.
+`polymerTests` is a method that is called with an object of browsers and a callback.
 
-### dump
+The callback is called for every browser initialized. The callback is called with a method
+`test` and an object `opts`. `test` takes a name, an object, and a callback.
 
-[dump](galen/dump.js) is a script that is meant to be loaded after `browsers` and `specs` have been defined.
-It will run through all the browsers and dump all the pages
+See [Example config](#configs) for examples
 
 ## Coding styles
 
