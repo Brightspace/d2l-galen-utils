@@ -7,6 +7,8 @@
     "load": true,
     "LocalBrowserFactory": true,
     "SauceBrowserFactory": true,
+    "polymerTests": true,
+    "checkLayout": true,
     "System": true
   }
 }

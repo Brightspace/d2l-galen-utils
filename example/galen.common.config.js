@@ -3,31 +3,28 @@
 
 var endpoint = 'http://localhost:8080/components/test/demo/index.html';
 
-this.specs = {
-	ltr: {
-		// This spec will be run on all browsers
-		name: 'LTR',
+polymerTests(this.browsers, function(test) {
+	test('LTR', {
 		endpoint: endpoint,
 		spec: 'example/specs/test.polyfill.gspec'
-	},
-	rtl: {
-		// This spec will be run on all browsers
-		name: 'RTL',
+	}, function(opts, cb) {
+		// do stuff with opts.driver, opts.report to put the page in a state before checking layout or dumping page
+		cb();
+	});
+
+	test('RTL', {
 		endpoint: endpoint + '?dir=rtl',
 		spec: 'example/specs/test.polyfill.rtl.gspec'
-	},
-	shadowLtr: {
-		// This spec will only be run on browsers that have shadow dom
-		shadow: true,
-		name: 'Shadow LTR',
+	});
+
+	// These tests will only be run on browsers that have shadow dom
+	test.shadow('Shadow LTR', {
 		endpoint: endpoint + '?dom=shadow',
 		spec: 'example/specs/test.shadow.gspec'
-	},
-	shadowRtl: {
-		// This spec will only be run on browsers that have shadow dom
-		shadow: true,
-		name: 'Shadow RTL',
+	});
+
+	test.shadow('Shadow RTL', {
 		endpoint: endpoint + '?dom=shadow&dir=rtl',
 		spec: 'example/specs/test.shadow.rtl.gspec'
-	}
-};
+	});
+});

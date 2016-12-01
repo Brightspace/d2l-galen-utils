@@ -1,8 +1,6 @@
 /* eslint no-invalid-this: 0 */
 'use strict';
 
-load('galen.common.config.js');
-
 this.browsers = {
 	phantomjs: new LocalBrowserFactory({
 		browser: 'phantomjs',
@@ -13,3 +11,5 @@ this.browsers = {
 		size: '768x768'
 	})
 };
+
+load('galen.common.config.js');

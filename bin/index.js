@@ -11,12 +11,11 @@ function copyEnv(envs) {
 	});
 }
 
-function run(argv, config, test, entrypoint) {
+function run(argv, config, entrypoint) {
 	let args = [
 		'test',
 		entrypoint,
-		`-Dd2l.galen.utils.config=${config}`,
-		`-Dd2l.galen.utils.test=${test}`
+		`-Dd2l.galen.utils.config=${config}`
 	];
 	argv.reportDir && args.push('--htmlreport', argv.reportDir);
 	argv.dumpsDir && args.push('-Dd2l.galen.utils.dumps=' + argv.dumpsDir);
@@ -56,18 +55,13 @@ require('yargs')
 			alias: 'e',
 			default: require.resolve('../galen/entrypoint.test')
 		},
-		test: {
-			alias: 't',
-			default: require.resolve('../galen/check.js')
-		},
 		reportDir: {
 			alias: 'r',
 			default: 'reports'
 		}
 	}, (argv) => {
 		const configPath = path.resolve(process.cwd(), argv.config);
-		const testPath = path.resolve(process.cwd(), argv.test);
-		run(argv, configPath, testPath, argv.entrypoint);
+		run(argv, configPath, argv.entrypoint);
 	})
 	.command('dump <config>', 'Create dump', {
 		dumpsDir: {
@@ -76,8 +70,7 @@ require('yargs')
 		}
 	}, (argv) => {
 		const configPath = path.resolve(process.cwd(), argv.config);
-		const testPath = require.resolve('../galen/dump.js');
-		run(argv, configPath, testPath, require.resolve('../galen/entrypoint.test'));
+		run(argv, configPath, require.resolve('../galen/entrypoint.test'));
 	})
 	.strict()
 	.demand(1)
