@@ -19,6 +19,7 @@ function run(argv, config, entrypoint) {
 	];
 	argv.reportDir && args.push('--htmlreport', argv.reportDir);
 	argv.dumpsDir && args.push('-Dd2l.galen.utils.dumps=' + argv.dumpsDir);
+	argv.groups && args.push('--groups', argv.groups);
 	args = args.concat(copyEnv(argv.includeEnv), argv._.slice(1));
 
 	const command = [];
@@ -50,6 +51,9 @@ require('yargs')
 	.global('i')
 	.array('i')
 	.default('i', [])
+	.describe('g', 'comma separated list of groups to run')
+	.alias('g', 'groups')
+	.global('g')
 	.command('test <config>', 'Run D2L Galen tests', {
 		entrypoint: {
 			alias: 'e',

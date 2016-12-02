@@ -1,9 +1,24 @@
 /* eslint no-invalid-this: 0 */
 'use strict';
 
+var browsers = {
+	phantomjs: new LocalBrowserFactory({
+		browser: 'phantomjs',
+		size: '768x768'
+	}),
+	chrome: new LocalBrowserFactory({
+		browser: 'chrome',
+		size: '768x768'
+	}),
+	chromeWindows: new SauceBrowserFactory({
+		browser: 'Chrome',
+		platform: 'WIN10',
+		size: '1400x900'
+	})
+};
 var endpoint = 'http://localhost:8080/components/test/demo/index.html';
 
-polymerTests(this.browsers, function(test) {
+polymerTests(browsers, function(test) {
 	test('LTR', {
 		endpoint: endpoint,
 		spec: 'example/specs/test.polyfill.gspec'

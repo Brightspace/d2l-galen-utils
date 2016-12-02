@@ -26,8 +26,10 @@ For every defined browser, `d2l-galen`
 4. Stop the browser
 
 ```
-d2l-galen test <path_to_config> -- --htmlreport report
-d2l-galen dump <path_to_config> -d dumps
+d2l-galen test <path_to_config> # run all tests
+d2l-galen test <path_to_config> -g factory:local # only run tests on local browsers
+d2l-galen test <path_to_config> -g factory:sauce # only run Sauce Labs tests
+d2l-galen dump <path_to_config> -d dumps -g factory:local
 
 # To make work with SauceLabs
 d2l-galen test <path_to_config> -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_SLUG TRAVIS_BUILD_NUMBER -- --htmlreport report
@@ -38,7 +40,8 @@ d2l-galen test <path_to_config> -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_S
 The config is a Javascript file that defines `specs` and `browsers`. For example
 
 ```javascript
-this.browsers = {
+// This can be placed in another file using `load`
+var browsers = {
 	// See settings argument for http://galenframework.com/docs/reference-galen-javascript-api/#createGridDriver
 	chromeWindows: new SauceBrowserFactory({
 		browser: 'Chrome',
@@ -51,8 +54,7 @@ this.browsers = {
 		size: '800x600'
 	})
 };
-// This can be placed in another file using `load`
-polymerTests(this.browsers, function(test, ctx) {
+polymerTests(browsers, function(test, ctx) {
 	ctx.driver.get('http://foo.bar');
 
 	test('stuff', {
