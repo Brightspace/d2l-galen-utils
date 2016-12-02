@@ -21,6 +21,8 @@ function SauceBrowserFactory(settings) {
 	settings = settings || {};
 	settings.groups = settings.groups || [];
 	settings.groups.push('factory:sauce');
+	settings.groups.push(('browser:' + settings.browser.toLowerCase()).toString());
+	settings.groups.push(('platform:' + settings.platform.toLowerCase()).toString());
 	settings.desiredCapabilities = settings.desiredCapabilities || {};
 	settings.desiredCapabilities.tunnelIdentifier = System.getProperty('d2l.galen.utils.env.TRAVIS_JOB_NUMBER');
 	settings.desiredCapabilities.name = System.getProperty('d2l.galen.utils.env.TRAVIS_REPO_SLUG');

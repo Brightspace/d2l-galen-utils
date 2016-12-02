@@ -6,6 +6,7 @@ function LocalBrowserFactory(settings) {
 	this.settings = settings;
 	settings.groups = settings.groups || [];
 	settings.groups.push('factory:local');
+	settings.groups.push(('browser:' + settings.browser.toLowerCase()).toString());
 }
 
 LocalBrowserFactory.prototype.create = function create(url) {

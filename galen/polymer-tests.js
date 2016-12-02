@@ -9,7 +9,7 @@ function polymerTests(browsers, runTests) {
 	Object.keys(browsers).forEach(function(browserName) {
 		var factory = browsers[browserName];
 		// FIXME: Workaround for Rhino Javascript not being able to convert a concatenated string to a Java.Lang.String
-		grouped([('browser:' + browserName).toString()].concat(factory.settings.groups), function() {
+		grouped(factory.settings.groups, function() {
 			test(browserName, function() {
 				var driver = factory.create();
 
