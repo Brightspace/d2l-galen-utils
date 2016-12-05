@@ -46,6 +46,7 @@ function polymerTests(browsers, runTests) {
 						Object.keys(opts).forEach(function(key) {
 							cloneOpts[key] = opts[key];
 						});
+						cloneOpts.tags = [].concat(cloneOpts.tags || [], factory.settings.tags || []);
 						cb(cloneOpts, defaultCb.bind(null, cloneOpts));
 					});
 				}

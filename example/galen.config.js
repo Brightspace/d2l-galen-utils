@@ -8,7 +8,8 @@ var browsers = {
 	}),
 	chrome: new LocalBrowserFactory({
 		browser: 'chrome',
-		size: '768x768'
+		size: '768x768',
+		tags: ['chrome']
 	}),
 	chromeWindows: new SauceBrowserFactory({
 		browser: 'Chrome',

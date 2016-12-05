@@ -46,12 +46,14 @@ var browsers = {
 	chromeWindows: new SauceBrowserFactory({
 		browser: 'Chrome',
 		platform: 'WIN10',
-		size: '800x600'
+		size: '800x600',
+        tags: ['chrome'] // tags gets appended to the test's tags property
 	}),
 	// Only 2 settings: browser and size
 	phantomjs: new LocalBrowserFactory({
 		browser: 'phantomjs',
-		size: '800x600'
+		size: '800x600',
+        tags: ['phantomjs']
 	})
 };
 polymerTests(browsers, function(test, ctx) {
