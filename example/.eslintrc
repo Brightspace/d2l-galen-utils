@@ -6,6 +6,7 @@
   "globals": {
     "load": true,
     "LocalBrowserFactory": true,
+    "ChromeBrowserFactory": true,
     "SauceBrowserFactory": true,
     "polymerTests": true,
     "checkLayout": true,

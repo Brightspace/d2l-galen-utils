@@ -6,10 +6,15 @@ var browsers = {
 		browser: 'phantomjs',
 		size: '768x768'
 	}),
-	chrome: new LocalBrowserFactory({
-		browser: 'chrome',
-		size: '768x768',
-		tags: ['chrome']
+	chromeNexus5: new ChromeBrowserFactory({
+		tags: ['chrome', 'mobile', 'nexus5'],
+		desiredCapabilities: {
+			chromeOptions: {
+				mobileEmulation: {
+					deviceName: 'Google Nexus 5'
+				}
+			}
+		}
 	}),
 	chromeWindows: new SauceBrowserFactory({
 		browser: 'Chrome',

@@ -49,6 +49,17 @@ var browsers = {
 		size: '800x600',
         tags: ['chrome'] // tags gets appended to the test's tags property
 	}),
+    // desiredCapabilities are sent to the ChromeDriver constructor
+    chromeNexus5: new ChromeBrowserFactory({
+		tags: ['chrome', 'mobile', 'nexus5'],
+		desiredCapabilities: {
+			chromeOptions: {
+				mobileEmulation: {
+					deviceName: 'Google Nexus 5'
+				}
+			}
+		}
+	}),
 	// Only 2 settings: browser and size
 	phantomjs: new LocalBrowserFactory({
 		browser: 'phantomjs',
@@ -120,6 +131,16 @@ galen test node_modules/d2l-galen-utils/galen/entrypoint.test.js -Dd2l.galen.uti
 The result is an object with `create` and `reportStatus` methods.
 
 To use the factory, `load(node_modules/d2l-galen-utils/galen/local-browser-factory.js)`
+or use the `d2l-galen` command, which includes it.
+
+### ChromeBrowserFactory
+
+`ChromeBrowserFactory` is a factory used to instantiate a chrome browser for tests.
+The `desiredCapabilities` property is sent to the `ChromeDriver` constructor.
+
+The result is an object with `create` and `reportStatus` methods.
+
+To use the factory, `load(node_modules/d2l-galen-utils/galen/chrome-browser-factory.js)`
 or use the `d2l-galen` command, which includes it.
 
 ### SauceBrowserFactory
