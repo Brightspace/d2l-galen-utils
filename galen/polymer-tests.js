@@ -1,4 +1,4 @@
-/* global PolymerPage */
+/* global PolymerPage readFile */
 /* eslint no-invalid-this: 0 */
 'use strict';
 
@@ -19,6 +19,10 @@ function polymerTests(browsers, runTests) {
 				var polymerPage;
 
 				function defaultCb(opts) {
+					if (System.getProperty('d2l.galen.utils.d2lShadow')) {
+						driver.executeScript(readFile(System.getProperty('d2l.galen.utils.d2lShadow') + ''));
+						opts.report.info('::d2l-shadow loaded');
+					}
 					if (opts.exportPath) {
 						dumpPage(opts);
 					} else {
