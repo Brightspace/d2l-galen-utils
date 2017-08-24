@@ -20,6 +20,10 @@ function run(argv, config, entrypoint) {
 	argv.reportDir && args.push('--htmlreport', argv.reportDir);
 	argv.dumpsDir && args.push('-Dd2l.galen.utils.dumps=' + argv.dumpsDir);
 	argv.groups && args.push('--groups', argv.groups);
+	if (argv.enableD2lShadow) {
+		const d2lShadow = require.resolve('../galen/open-shadow-piercing-css-polyfill.js');
+		args.push('-Dd2l.galen.utils.d2lShadow=' + d2lShadow);
+	}
 	args = args.concat(copyEnv(argv.includeEnv), argv._.slice(1));
 
 	const command = [];
@@ -54,6 +58,9 @@ require('yargs')
 	.describe('g', 'comma separated list of groups to run')
 	.alias('g', 'groups')
 	.global('g')
+	.describe('s', 'enable ::d2l-shadow psuedo selector')
+	.alias('s', 'enable-d2l-shadow')
+	.global('s')
 	.command('test <config>', 'Run D2L Galen tests', {
 		entrypoint: {
 			alias: 'e',
