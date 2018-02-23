@@ -12,6 +12,7 @@ function copyEnv(envs) {
 }
 
 function run(argv, config, entrypoint) {
+	config = path.relative(path.dirname(entrypoint), config);
 	let args = [
 		'test',
 		entrypoint,
