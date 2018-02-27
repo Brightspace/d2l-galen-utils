@@ -17,8 +17,7 @@
   "devDependencies": {
     "eslint": "^3.10.1",
     "eslint-config-brightspace": "^0.2.4",
-    "galenframework": "^2.3.1",
-    "galenframework-cli": "^2.3.1"
+    "galenframework-cli": "^2.3.6"
   },
   "peerDependencies": {
     "galenframework": "*"

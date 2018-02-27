@@ -79,6 +79,10 @@ require('yargs')
 		dumpsDir: {
 			alias: 'd',
 			default: 'dumps'
+		},
+		reportDir: {
+			alias: 'r',
+			default: 'reports'
 		}
 	}, (argv) => {
 		const configPath = path.resolve(process.cwd(), argv.config);
