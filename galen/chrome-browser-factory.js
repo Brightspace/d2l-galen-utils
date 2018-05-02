@@ -8,8 +8,9 @@ importClass(com.galenframework.browser.SeleniumBrowserFactory);
 function ChromeBrowserFactory(settings) {
 	this.settings = settings;
 	settings.groups = settings.groups || [];
-	settings.groups.push('factory:local');
+	settings.groups.push('factory:sauce');
 	settings.groups.push('browser:chrome');
+	settings.groups.push(('platform:' + settings.platform.toLowerCase()).toString());
 }
 
 ChromeBrowserFactory.prototype.create = function create(url) {
@@ -27,7 +28,7 @@ ChromeBrowserFactory.prototype.create = function create(url) {
 	url && driver.get(url);
 	settings.size && resize(driver, settings.size);
 
-	var capabilities = driver.getCapabilities();
+	capabilities = driver.getCapabilities();
 	console.log(capabilities);
 
 	return driver;
