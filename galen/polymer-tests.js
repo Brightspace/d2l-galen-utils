@@ -4,6 +4,21 @@
 
 load('polymer-page.js');
 
+function retry(cb, driver, report, numRetries) {
+	for (var i = 0; i < numRetries; ++i) {
+		try {
+			cb();
+			break;
+		} catch (e) {
+			try {
+				report.error(e.toString() + (e.stack || e.message || e.name)).withAttachment('Screenshot', takeScreenshot(driver));
+			} catch (err) {
+				report.error(e.toString() + (e.stack || e.message || e.name));
+			}
+		}
+	}
+}
+
 function polymerTests(browsers, runTests) {
 	function loggerWrapper(report, driver, cb) {
 		try {
@@ -61,7 +76,7 @@ function polymerTests(browsers, runTests) {
 								cloneOpts[key] = opts[key];
 							});
 							cloneOpts.tags = [].concat(cloneOpts.tags || [], factory.settings.tags || []);
-							cb(cloneOpts, runTest.bind(null, cloneOpts));
+							retry(cb.bind(this, cloneOpts, runTest.bind(null, cloneOpts)), opts.driver, opts.report, 3);
 						});
 					});
 				}
