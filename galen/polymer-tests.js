@@ -76,7 +76,7 @@ function polymerTests(browsers, runTests) {
 								cloneOpts[key] = opts[key];
 							});
 							cloneOpts.tags = [].concat(cloneOpts.tags || [], factory.settings.tags || []);
-							retry(cb.bind(this, cloneOpts, runTest.bind(null, cloneOpts)), opts.driver, opts.report, 3);
+							retry(cb.bind(this, cloneOpts, runTest.bind(null, cloneOpts)), opts.driver, report, 3);
 						});
 					});
 				}
