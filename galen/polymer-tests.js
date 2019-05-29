@@ -13,6 +13,7 @@ function retry(cb, driver, report, numRetries) {
 			try {
 				report.error(e.toString() + (e.stack || e.message || e.name)).withAttachment('Screenshot', takeScreenshot(driver));
 			} catch (err) {
+				report.error(err.toString() + (err.stack || err.message || err.name));
 				report.error(e.toString() + (e.stack || e.message || e.name));
 			}
 		}
@@ -76,7 +77,7 @@ function polymerTests(browsers, runTests) {
 								cloneOpts[key] = opts[key];
 							});
 							cloneOpts.tags = [].concat(cloneOpts.tags || [], factory.settings.tags || []);
-							retry(cb.bind(this, cloneOpts, runTest.bind(null, cloneOpts)), opts.driver, report, 3);
+							retry(cb.bind(this, cloneOpts, runTest.bind(null, cloneOpts)), driver, report, 3);
 						});
 					});
 				}
