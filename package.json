@@ -15,7 +15,7 @@
     "yargs": "^6.4.0"
   },
   "devDependencies": {
-    "eslint": "^3.10.1",
+    "eslint": "^6.6.0",
     "eslint-config-brightspace": "^0.2.4",
     "galenframework-cli": "^2.3.6"
   },
